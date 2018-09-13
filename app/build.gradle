@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+
+
+//分享
+apply plugin: 'com.mob.sdk'
+MobSDK {
+    //配置自己mob的 appKey ，appSecret
+    appKey "d580ad56b4b5"
+    appSecret "7fcae59a62342e7e2759e9e397c82bdd"
+
+    ShareSDK {
+        //平台配置信息(Z注意SDK版本最低16)  //配置机构平台显示几个平台
+        devInfo {
+            //配置自己注册的新浪开发者平台(不配置自己的分享失败)
+            SinaWeibo {
+                appKey "568898243"
+                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient false
+            }
+            //配置自己注册的微信开发者平台(不配置自己的分享失败)
+            Wechat {
+                appId "wx694a26d88b7300be"
+                appSecret "944b67c370c1fecc8f9c386f9f0d645b"
+            }
+            //配置自己注册的QQ开发者平台
+            QQ {
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+                shareByAppClient true
+            }
+
+        }
+    }
+
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
+    defaultConfig {
+        applicationId "cn.zdh.mobshare"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}
